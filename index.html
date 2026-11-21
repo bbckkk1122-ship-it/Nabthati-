@@ -108,6 +108,9 @@
         </svg>
         إعادة التعيين
       </button>
+            <button id="shareBtn" type="button" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 transition flex items-center gap-1.5 shadow-sm">
+        نسخ نتيجتي
+      </button>
     </div>
   </header>
 
@@ -423,11 +426,28 @@
 
       </div>
     </div>
+        <!-- شرح سريع للمصطلحات -->
+    <details class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/80 text-sm text-slate-600 cursor-pointer">
+      <summary class="font-extrabold text-slate-800 select-none">
+        كيف تعمل الحاسبة؟ وما معنى الانحراف المعياري و (Z)؟
+      </summary>
+      <div class="mt-3 pt-3 border-t border-slate-100 space-y-2 leading-relaxed">
+        <p><strong>• الانحراف المعياري:</strong> يقيس مدى تقارب درجات الطلاب؛ كلما كان "قوياً" يعني أن أغلب الطلاب متقاربون جداً حول المتوسط، فتفرق معك كل إجابة صح بشكل أكبر.</p>
+        <p><strong>• معيار (Z):</strong> يوضح كم تبعد درجتك عن متوسط بقية المختبرين (كلما زاد الرقم الموجب كنت ضمن نسبة أعلى من الطلاب).</p>
+
+      </div>
+    </details>
+
   </main>
 
   <!-- التذييل وتنويه إخلاء المسؤولية -->
   <footer class="mt-auto border-t border-slate-200 bg-white">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-5 text-center space-y-1">
+            <p class="text-xs text-slate-400 font-bold pt-2">
+        تطوير وحقوق © 2026 — Nabthati •
+        <a href="https://t.me/mqwwsk" target="_blank" class="text-emerald-600 hover:underline">@mqwwsk</a>
+      </p>
+
       <p class="text-xs sm:text-sm text-slate-500 font-medium">
         تنويه: هذه الحاسبة تقدم <strong class="text-slate-700">تقديراً إحصائياً تقريبياً</strong> مبنياً على معادلات التوزيع الطبيعي والانحراف المعياري، ولا تمثل نتيجة رسمية صادرة من هيئة تقويم التعليم والتدريب (قياس).
       </p>
@@ -954,6 +974,21 @@
       updatePresetStyles();
       updateSdStyles();
       updateAll();
+            // زر نسخ ومشاركة النتيجة
+      const shareBtn = document.getElementById('shareBtn');
+      if (shareBtn) {
+        shareBtn.addEventListener('click', () => {
+          const score = el.heroTotalScore.textContent;
+          const cap = el.heroMaxCap.textContent;
+          const perc = el.heroPercentileText.textContent;
+          const text = `توقعي في التحصيلي المبكر: ${score} من ${cap} 🎯\n${perc}\n\nجرب الحاسبة من هنا:\n${window.location.href}`;
+          navigator.clipboard.writeText(text).then(() => {
+            shareBtn.textContent = 'تم النسخ! ✓';
+            setTimeout(() => { shareBtn.textContent = 'نسخ نتيجتي'; }, 2000);
+          });
+        });
+      }
+
     })();
   </script>
 </body>
