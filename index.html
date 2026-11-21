@@ -981,9 +981,10 @@
       if (shareBtn) {
         shareBtn.addEventListener('click', () => {
           const score = el.heroTotalScore.textContent;
-          const cap = el.heroMaxCap.textContent;
-          const perc = el.heroPercentileText.textContent;
-          const text = `توقعي في التحصيلي المبكر: ${score} من ${cap} 🎯\n${perc}\n\nجرب الحاسبة من هنا:\n${window.location.href}`;
+                    const cap = el.heroMaxCap.textContent;
+
+          const text = `توقعي في التحصيلي المبكر: ${score} من ${cap} 🎯\n\nجرب الحاسبة من هنا:\n${window.location.href}`;
+
           navigator.clipboard.writeText(text).then(() => {
             shareBtn.textContent = 'تم النسخ! ✓';
             setTimeout(() => { shareBtn.textContent = 'نسخ نتيجتي'; }, 2000);
